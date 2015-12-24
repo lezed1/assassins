@@ -1,0 +1,65 @@
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE-edge"/>
+
+  <title>Assassins</title>
+
+  <meta name="description" content="assassins"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+</head>
+
+<template name="ApplicationLayout">
+  <div class="fixed contain-to-grid">
+    <nav class="top-bar" data-topbar role="navigation">
+      <ul class="title-area">
+	<li class="name">
+	  <h1>{{#linkTo route="home"}}Assassain{{/linkTo}}</h1>
+	</li>
+      </ul>
+
+      <section class="top-bar-section">
+	<ul class="left">
+	  <!-- <li class="{{isActiveRoute regex='dashboard'}}"> -->
+	  <li>
+	    {{#linkTo route="dashboard"}}Dashboard{{/linkTo}}
+	  </li>
+	</ul>
+      </section>
+      
+      <section class="top-bar-section">
+	<ul class="right">
+	  {{#if currentUser}}
+	  <li>
+	    {{#linkTo route="dashboard"}}{{currentUser.profile.name}}{{/linkTo}}
+	  </li>
+	  <li>
+	    {{#linkTo route="home"}}Logout{{/linkTo}}
+	  </li>
+	  {{else}}
+	  <li>
+	    {{#linkTo route="atSignUp"}}Sign Up{{/linkTo}}
+	  </li>
+	  <li>
+	    {{#linkTo route="atSignIn"}}Log In{{/linkTo}}
+	  </li>
+	  {{/if}}
+	</ul>
+      </section>
+
+    </nav>
+  </div>
+
+  <section role="main">
+    <div class="row">
+      <div class="small-12 columns">
+	<h1>Filler because CSS is hard...</h1>
+	{{> yield}}
+      </div>
+    </div>
+  </section>
+</template>
+	    
+<template name="Hello">
+  <button>Click Me</button>
+  <p>You've pressed the button {{counter}} times.</p>
+</template>

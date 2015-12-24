@@ -1,0 +1,2 @@
+* TODO Active route in top navigation bar
+* TODO Hide  signup when logged in

@@ -1,0 +1,28 @@
+<template name="Signup-old">
+  <h2>Signup!</h2>
+  <form>
+    <div class="row">
+      <div class="small-12 columns">
+	<label> Name
+	  <input id="signup-name" name="name" type="text" placeholder="Ezra Cornell"/>
+	</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="small-12 columns">
+	<label> NetID:
+	  <input id="signup-netid" name="netid" type="text" placeholder="ec150"/>
+	</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="small-12 columns">
+	<input class="button expand" type="submit" value="Sign up"/>
+      </div>
+    </div>
+  </form>
+</template>
+
+<template name="Signup">
+  {{> atForm}}
+</template>
