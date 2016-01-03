@@ -2,5 +2,6 @@
 # type: "status"
 # gameState: "pregame" / "ingame" / "postgame"
 
-if not (GameState.findOne type: "status")?
-  GameState.insert {type: "status", gameState: "pregame"}
+Meteor.startup ->
+  if not (GameState.findOne type: "status")?
+    GameState.insert {type: "status", gameState: "pregame"}

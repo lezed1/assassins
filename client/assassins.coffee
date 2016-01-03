@@ -19,4 +19,7 @@ Router.route('/', (-> @render('Home')),
     @next()
 )
 
-Router.route('/dashboard', (-> @render("Dashboard")),  name: 'dashboard')
+Router.route('/dashboard', (-> @render("Dashboard")),
+  name: 'dashboard'
+  subscriptions: -> @subscribe('target') # This is not reactive...
+)

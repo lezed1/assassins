@@ -4,7 +4,8 @@ Meteor.methods
     first_player = _.first(players)
 
     assign_target = (player1, player2) ->
-      Meteor.users.update(player1._id, "$set": {target: player2._id})
+      Targets.remove({}) # Check game state, don't just throw out data...
+      Targets.insert(player_id: player1._id, target_id: player2._id)
       console.log("Assigned player #{player1._id} to target #{player2._id}!")
       player2
 
