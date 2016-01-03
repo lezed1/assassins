@@ -1,14 +1,10 @@
-# counter starts at 0
-Session.setDefault('counter', 0)
+# Session variable for the current gameState
+Tracker.autorun ->
+  status = GameState.findOne(type: "status")
+  if status?
+    Session.set("gameState", status.gameState)
 
-Template.Hello.helpers(counter: -> Session.get('counter'))
-
-Template.Hello.events(
-  'click button': ->
-    # increment the counter when button is clicked
-    Session.set('counter', Session.get('counter') + 1)
-)
-
+# Routing
 Router.plugin('ensureSignedIn', only: ['dashboard'])
 
 Router.configure(layoutTemplate: 'ApplicationLayout')
