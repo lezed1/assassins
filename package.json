@@ -1,0 +1,21 @@
+{
+  "name": "assassins",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Assassins",
+  "main": "assassins.js",
+  "dependencies": {
+    "foundation-sites": "^6.2.1",
+    "i": "^0.3.4",
+    "react": "^15.0.1",
+    "react-dom": "^15.0.1",
+    "react-mounter": "^1.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "meteor run"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
