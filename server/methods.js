@@ -22,14 +22,17 @@ Meteor.methods({
 
         var secret_words = `${secret1} ${secret2}`;
 
-        var a = Accounts.createUser({
+        var user = {
             username: id,
             email: id + emailSuffix,
             password: secret_words,
             profile: {secret_words, name}
-        });
+        };
+        var a = Accounts.createUser(user);
 
+        console.log(user);
         Accounts.sendVerificationEmail(a);
+
 
         return secret_words;
 
