@@ -11,7 +11,7 @@ FlowRouter.route("/", {
     name: "home",
     action() {
         mount(Layout, {
-            content: (<Home name="lezed1"/>)
+            content: (<Home/>)
         });
 
         $(document).foundation();
@@ -28,9 +28,7 @@ FlowRouter.route("/confirm", {
 });
 
 var loggedIn = FlowRouter.group({
-    triggersEnter: [function (context, redirect) {
-        console.log(Meteor.loggingIn());
-        console.log(Meteor.userId());
+    triggersEnter: [function () {
         if (!Meteor.loggingIn() && !Meteor.userId()) {
             FlowRouter.go("home");
         }
