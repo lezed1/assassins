@@ -30,7 +30,7 @@ export class SignUp extends React.Component {
         var id = this.state.id.trim();
 
         if (!name || !id) {
-            // return;
+            return;
         }
 
         Meteor.call("user.signup", {name, id}, (error, res) => {
@@ -52,10 +52,10 @@ export class SignUp extends React.Component {
                     <form onSubmit={this.handleSubmit}>
                         {this.state.error}
                         <label>Name
-                            <input type="text" placeholder="John Jay" onChange={this.handleNameChange}/>
+                            <input type="text" placeholder="John Jay" required onChange={this.handleNameChange}/>
                         </label>
                         <label>eChalk ID
-                            <input type="text" placeholder="jjay" onChange={this.handleIdChange}/>
+                            <input type="text" placeholder="jjay" required onChange={this.handleIdChange}/>
                         </label>
                         <input type="submit" className="button" value="Submit"/>
                     </form>

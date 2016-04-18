@@ -27,4 +27,4 @@ accounts-ui
 gwendall:blaze-to-react
 email
 react-meteor-data
-kadira:debug
+meteorhacks:kadira
