@@ -26,7 +26,7 @@ Meteor.methods({
             username: id,
             email: id + emailSuffix,
             password: secret_words,
-            profile: {secret_words: secret_words}
+            profile: {secret_words, name}
         });
 
         Accounts.sendVerificationEmail(a);
