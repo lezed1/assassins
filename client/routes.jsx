@@ -5,6 +5,7 @@ import {mount} from 'react-mounter';
 import {Layout, Welcome} from './app.jsx';
 import {Home} from "./home.jsx";
 import {Dashboard} from "./dashboard.jsx";
+import {Admin} from "./admin.jsx";
 import {SignUpConfirm} from "./accounts.jsx";
 
 FlowRouter.route("/", {
@@ -40,6 +41,20 @@ loggedIn.route("/dashboard", {
     action() {
         mount(Layout, {
             content: (<Dashboard/>)
+        });
+
+        $(document).foundation();
+    }
+});
+
+loggedIn.route("/admin", {
+    name: "admin",
+    subscriptions() {
+        this.register("admin", Meteor.subscribe("admin"));
+    },
+    action() {
+        mount(Layout, {
+            content: (<Admin/>)
         });
 
         $(document).foundation();

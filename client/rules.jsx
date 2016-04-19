@@ -9,11 +9,10 @@ export const Rules = () => (
                         The rules are not yet finalized. Please check back soon!
                     </p>
                     <ul>
-                        <li>The Spoons game will start soon.
-                            // at 12:01 am on Wednesday, May 7th. You may pick up your
-                            // personalized spoon from Rizzotti during periods 2,6,7,9 or before or after school on
-                            // Tuesday, May 6th. If you do not pick up your spoon before the start of the game and get
-                            // tagged, you are still out.
+                        <li>The Spoons game will start at 12:01 am on Friday, April 22th. You may pick up your
+                            personalized spoon from Rizzotti during periods 2,6,7,9 or before or after school on
+                            Thursday, April 21th. If you do not pick up your spoon before the start of the game and get
+                            tagged, you are still out.
                         </li>
                         <li> You must hold your spoon in your hand at all times. You cannot use tape or any other device
                             (such as rubber bands, glue or bracelets) to keep your spoon in your hand. You may not tuck
@@ -44,7 +43,7 @@ export const Rules = () => (
                             computer lab for example, that location counts as your classroom. If you leave your
                             classroom early before the bells rings or for any other reason such as a bathroom break,
                             then you are no longer safe. At all other times the game is on. You are also completely safe
-                            during the day of Prom- this exemption is from 12:00 am on 6/17 to 1:00 am on 6/18. Your
+                            during the day of Prom - this exemption is from 12:00 am on 6/17 to 1:00 am on 6/18. Your
                             spoon may not be stolen during this day as well.
                         </li>
 
@@ -82,13 +81,12 @@ export const Rules = () => (
                             final.
                         </li>
                         <li> The game will continue until only one person is left. This person will be deemed
-                            "Spoons Champion" and receive the use of Mr. Goetz’s parking spot for a certain week.
-                            // the week of 6/2-6.
-                            // If, as of May 30th, we do not have an outright winner a raffle for the parking spot will
-                            // be had. The raffle will be set up such that you will get one ticket for yourself and an
-                            // additional one for each person you have eliminated. This raffle will take place after
-                            // school on 5/30. The game will continue on though so that one person can earn the
-                            // distinction of being "Spoons Champion".
+                            "Spoons Champion" and receive the use of Mr. Goetz’s parking spot for the week of 6/6-10.
+                            If, as of June 3rd, we do not have an outright winner a raffle for the parking spot will
+                            be had. The raffle will be set up such that you will get one ticket for yourself and an
+                            additional one for each person you have eliminated. This raffle will take place after
+                            school on 5/30. The game will continue on though so that one person can earn the
+                            distinction of being "Spoons Champion".
                         </li>
                         <li> Most importantly please remember that this is for fun. Play with good sportsmanship and
                             have fun playing.
