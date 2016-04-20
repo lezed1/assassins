@@ -47,7 +47,15 @@ loggedIn.route("/dashboard", {
     }
 });
 
-loggedIn.route("/admin", {
+var admin = loggedIn.group({
+    triggersEnter: [function () {
+        if (!Meteor.loggingIn() && !Meteor.user().profile.admin) {
+            FlowRouter.go("home");
+        }
+    }]
+});
+
+admin.route("/admin", {
     name: "admin",
     subscriptions() {
         this.register("admin", Meteor.subscribe("admin"));

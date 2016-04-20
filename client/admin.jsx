@@ -53,11 +53,8 @@ export var Admin = React.createClass({
         ];
 
         return (
-            <Table data={this.data.users} columns={columns} sortable={true} defaultSort={{column: 'Name', direction: 'desc'}}/>
+            <Table className="hover table-scroll" data={this.data.users} columns={columns} sortable={true}
+                   defaultSort={{column: 'Name', direction: 'desc'}}/>
         )
     }
 });
-
-// export Admin = createContainer(({params})=>{
-//
-// });
