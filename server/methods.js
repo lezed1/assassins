@@ -26,7 +26,13 @@ Meteor.methods({
             username: id,
             email: id + emailSuffix,
             password: secret_words,
-            profile: {secret_words, name}
+            profile: {
+                secret_words,
+                name,
+                enabled: false,
+                tags: 0,
+                target: ""
+            }
         };
         var a = Accounts.createUser(user);
 

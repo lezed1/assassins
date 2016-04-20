@@ -5,7 +5,7 @@ import {mount} from 'react-mounter';
 import {Layout, Welcome} from './app.jsx';
 import {Home} from "./home.jsx";
 import {Dashboard} from "./dashboard.jsx";
-import {Admin} from "./admin.jsx";
+import {AdminHome, AdminUserList} from "./admin.jsx";
 import {SignUpConfirm} from "./accounts.jsx";
 
 FlowRouter.route("/", {
@@ -14,8 +14,6 @@ FlowRouter.route("/", {
         mount(Layout, {
             content: (<Home/>)
         });
-
-        $(document).foundation();
     }
 });
 
@@ -42,12 +40,11 @@ loggedIn.route("/dashboard", {
         mount(Layout, {
             content: (<Dashboard/>)
         });
-
-        $(document).foundation();
     }
 });
 
 var admin = loggedIn.group({
+    prefix: "/admin",
     triggersEnter: [function () {
         if (!Meteor.loggingIn() && !Meteor.user().profile.admin) {
             FlowRouter.go("home");
@@ -55,16 +52,26 @@ var admin = loggedIn.group({
     }]
 });
 
-admin.route("/admin", {
+admin.route("/", {
     name: "admin",
     subscriptions() {
         this.register("admin", Meteor.subscribe("admin"));
     },
     action() {
         mount(Layout, {
-            content: (<Admin/>)
+            content: (<AdminHome/>)
         });
+    }
+});
 
-        $(document).foundation();
+admin.route("/users", {
+    name: "admin.users",
+    subscriptions() {
+        this.register("admin", Meteor.subscribe("admin"));
+    },
+    action() {
+        mount(Layout, {
+            content: (<AdminUserList/>)
+        });
     }
 });
