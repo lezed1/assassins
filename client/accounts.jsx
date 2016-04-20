@@ -51,6 +51,7 @@ export class SignUp extends React.Component {
                 <div className="callout secondary">
                     <form onSubmit={this.handleSubmit}>
                         {this.state.error}
+                        <div className="callout warning">eChalk ID referrs to the part of your email byfore the "@". <br/> ([eChalk ID]@klschools.org)</div>
                         <label>Name
                             <input type="text" placeholder="John Jay" required onChange={this.handleNameChange}/>
                         </label>

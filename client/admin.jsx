@@ -1,18 +1,8 @@
 import React from 'react';
-import SortableTable from 'react-sortable-table';
+import {Table, Sort} from "reactable";
 
 import {createContainer} from 'meteor/react-meteor-data';
 
-window.React = React;
-
-
-class Table extends React.Component {
-    render() {
-        return (
-            <SortableTable data={this.props.data} columns={this.props.columns}/>
-        )
-    }
-}
 
 export var Admin = React.createClass({
     mixins: [ReactMeteorData],
@@ -22,43 +12,48 @@ export var Admin = React.createClass({
                 _id: user._id,
                 name: user.profile.name,
                 eChalkId: user.username,
-                target: user.profile.target,
-                tags: user.profile.tags,
-                enabled: user.profile.enabled
+                verified: user.emails[0].verified.toString(),
+                enabled: user.profile.enabled || "UNSET",
+                target: user.profile.target || "UNSET",
+                tags: user.profile.tags || "UNSET",
+                secret_words: user.profile.secret_words
             }))
         }
     },
     render() {
         const columns = [
             {
-                header: "Name",
-                key: "name",
-                defaultSorting: "ASC"
+                label: "Name",
+                key: "name"
             },
             {
-                header: "eChalk ID",
-                key: "eChalkId",
-                defaultSorting: "ASC"
+                label: "eChalk ID",
+                key: "eChalkId"
             },
             {
-                header: "enabled",
-                key: "enabled",
-                defaultSorting: "ASC"
+                label: "Verified",
+                key: "verified"
             },
             {
-                header: "target",
-                key: "target",
-                defaultSorting: "ASC"
+                label: "enabled",
+                key: "enabled"
             },
             {
-                header: "tags",
-                key: "tags",
-                defaultSorting: "ASC"
+                label: "target",
+                key: "target"
+            },
+            {
+                label: "tags",
+                key: "tags"
+            },
+            {
+                label: "Secret Words",
+                key: "secret_words"
             }
         ];
 
         return (
-            <Table data={this.data.users} columns={columns}/>
+            <Table data={this.data.users} columns={columns} sortable={true} defaultSort={{column: 'Name', direction: 'desc'}}/>
         )
     }
 });
