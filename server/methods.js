@@ -42,5 +42,11 @@ Meteor.methods({
 
         return secret_words;
 
+    },
+    "user.enable"(_id){
+        if (Meteor.users.findOne(this.userId).profile.admin) {
+            var enabled = Meteor.users.findOne(_id).profile.enabled;
+            Meteor.users.update(_id, {$set: {"profile.enabled": !enabled}});
+        }
     }
 });

@@ -45,22 +45,27 @@
 @include foundation-top-bar;
 
 
-th.reactable-header-sort-desc, th.reactable-header-sort-asc {
-background-color: darken($table-head-background, 15%);
-}
+//th.reactable-header-sort-desc, th.reactable-header-sort-asc {
+//background-color: darken($table-head-background, 15%);
+//}
+//
+//th.reactable-header-sort-desc:after {
+//  content: '▼';
+//  font-size: 10px;
+//  padding-left: 10px;
+//  padding-bottom: 5px;
+//}
+//
+//th.reactable-header-sort-asc:after {
+//  content: '▲';
+//  font-size: 10px;
+//  padding-left: 10px;
+//  padding-bottom: 5px;
+//}
 
-
-
-th.reactable-header-sort-desc:after {
-  content: '▼';
-  font-size: 10px;
-  padding-left: 10px;
-  padding-bottom: 5px;
-}
-
-th.reactable-header-sort-asc:after {
-  content: '▲';
-  font-size: 10px;
-  padding-left: 10px;
-  padding-bottom: 5px;
+tr.success {
+  background-color: lighten($success-color, 30%);
+  &:nth-child(even) {
+    background-color: lighten($success-color, 10%);
+  }
 }

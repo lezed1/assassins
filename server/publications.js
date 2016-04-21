@@ -4,8 +4,14 @@ Meteor.publish('admin', function () {
     }
 });
 
+function isAdmin(userId) {
+    return Meteor.users.findOne(userId).profile.admin;
+}
+
 Meteor.users.deny({
-    update: function () {
-        return true;
-    }
+    update: (userId) => !isAdmin
+});
+
+Meteor.users.allow({
+    update: isAdmin
 });
