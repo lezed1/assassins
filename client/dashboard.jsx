@@ -1,12 +1,10 @@
 import React from 'react';
 
-export class Dashboard extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = Meteor.user().profile;
-    }
-
+export const Dashboard = React.createClass({
+    mixins: [ReactMeteorData],
+    getMeteorData(){
+        return Meteor.user()
+    },
     render() {
         return (
             <div>
@@ -15,8 +13,9 @@ export class Dashboard extends React.Component {
                     <div className="small-12 medium-6 columns">
                         <div className="callout secondary">
                             <h5>Your Info:</h5>
-                            <p>Name: {this.state.name}</p>
-                            <p>Secret Words: {this.state.secret_words}</p>
+                            <p>Name: {this.data.profile.name}</p>
+                            <p>Secret Words: {this.data.profile.secret_words}</p>
+                            <p>Email verified: {this.data.emails[0].verified.toString()}</p>
                         </div>
                     </div>
                     <div className="small-12 medium-6 columns">
@@ -28,4 +27,4 @@ export class Dashboard extends React.Component {
             </div>
         )
     }
-}
+});
