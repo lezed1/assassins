@@ -1,26 +1,23 @@
 import React from 'react';
-import {Table, Sort} from "reactable";
 
 import {createContainer} from 'meteor/react-meteor-data';
 import {isElegibleUser} from "/lib/game";
 
-const UserRow = React.createClass({
-    render() {
-        return (
-            <tr>
-                <td>{this.props.user.name}</td>
-                <td>{this.props.user.eChalkId}</td>
-                <td>{this.props.user.verified}</td>
-                <td>{this.props.user.enabled}</td>
-                <td>{this.props.user.target}</td>
-                <td>{this.props.user.tags}</td>
-                <td>{this.props.user.secret_words}</td>
-            </tr>
-        )
+Template.enabler.events({
+    "click"() {
+        console.log(this)
+        Meteor.users.update(this._id, {$set: {"profile.enabled": !this.profile.enabled}});
     }
 });
 
 export const AdminUserList = React.createClass({
+    getRowClass(user) {
+        if (isElegibleUser(user)) {
+            return "success"
+        } else {
+            return ""
+        }
+    },
     render(){
         const fields = [
             {
@@ -37,8 +34,10 @@ export const AdminUserList = React.createClass({
             },
             {
                 label: "enabled",
-                key: "profile.enabled",
-                fn: (value, user, key) => user.profile.enabled.toString()
+                // key: "profile.enabled",
+                // fn: (value, user, key) => user.profile.enabled.toString(),
+                // cellClass: "enabler",
+                tmpl: Template.enabler
             },
             {
                 label: "target",
@@ -55,8 +54,12 @@ export const AdminUserList = React.createClass({
         ];
 
         return (
-            <BlazeToReact blazeTemplate="reactiveTable" class="hover table-scroll" fields={fields}
-                          collection={Meteor.users} showNavigation="auto" rowsPerPage={10000}/>
+            <div>
+                <h3>Green rows will be put into the game.</h3>
+                <BlazeToReact blazeTemplate="reactiveTable" class="table-scroll" fields={fields}
+                              collection={Meteor.users} showNavigation="auto" rowsPerPage={10000}
+                              rowClass={this.getRowClass}/>
+            </div>
         )
     }
 });

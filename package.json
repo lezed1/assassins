@@ -17,7 +17,6 @@
     "react-addons-update": "^15.0.1",
     "react-dom": "^15.0.1",
     "react-mounter": "^1.2.0",
-    "reactable": "^0.13.0"
   },
   "devDependencies": {},
   "scripts": {
