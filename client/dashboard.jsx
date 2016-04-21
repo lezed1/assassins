@@ -1,4 +1,5 @@
 import React from 'react';
+import {emailSuffix} from "../lib/settings"
 
 export const Dashboard = React.createClass({
     mixins: [ReactMeteorData],
@@ -15,6 +16,7 @@ export const Dashboard = React.createClass({
                             <h5>Your Info:</h5>
                             <p>Name: {this.data.profile.name}</p>
                             <p>Secret Words: {this.data.profile.secret_words}</p>
+                            <p>Email: {`${this.data.username}${emailSuffix}`}</p>
                             <p>Email verified: {this.data.emails[0].verified.toString()}</p>
                         </div>
                     </div>
