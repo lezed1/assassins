@@ -1,6 +1,10 @@
 {
   "public": {
-
+    "analyticsSettings": {
+      "Google Analytics": {
+        "trackingId": "UA-40914699-6"
+      }
+    }
   },
   "kadira": {
     "appId": "fgaRqSv2N6pzAuugc",
