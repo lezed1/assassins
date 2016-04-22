@@ -12,6 +12,11 @@ export const AdminHome = React.createClass({
             eligibleUserTotal: elegibleUserCount()
         }
     },
+    handleStartGame(){
+        if (confirm("Do you actually want to start the game?")) {
+            Meteor.call("startGame");
+        }
+    },
     render(){
         return (
             <div className="row">
@@ -32,6 +37,7 @@ export const AdminHome = React.createClass({
                 <div className="small-12 large-2 columns">
                     <div className="callout">
                         <h3>Buttons.</h3>
+                        <button type="button" className="primary button" onClick={this.handleStartGame}>Start the game!</button>
                     </div>
                 </div>
             </div>

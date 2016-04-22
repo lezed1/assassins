@@ -47,6 +47,9 @@ var loggedIn = FlowRouter.group({
 
 loggedIn.route("/dashboard", {
     name: "dashboard",
+    subscriptions() {
+        this.register("targetName", Meteor.subscribe("targetName"));
+    },
     action() {
         mount(Layout, {
             content: (<Dashboard/>)

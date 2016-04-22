@@ -1,10 +1,12 @@
 import React from 'react';
 
+import {getGameState} from "../lib/game";
+
 
 export const Rules = React.createClass({
     mixins: [ReactMeteorData],
     getMeteorData(){
-        return {pregame: Session.equals("gameState", "pregame")}
+        return {pregame: getGameState() == "pregame"}
     },
     render() {
         var rulesState;

@@ -22,6 +22,31 @@ Template.disabler.events({
     }
 });
 
+Template.namer.events({
+    "dblclick"() {
+        var name = prompt(`Enter a new name for ${this.profile.name} (id: ${this.username})`);
+
+        if (name != null) {
+            Meteor.users.update(this._id, {$set: {"profile.name": name}});
+        }
+    }
+});
+
+Template.usernamer.events({
+    "dblclick"() {
+        var username = prompt(`Enter a new ID for ${this.profile.name} (id: ${this.username})`);
+
+        if (username != null) {
+            if (Meteor.users.findOne({username: username})) {
+                alert("This username is already taken.");
+                return;
+            }
+
+            Meteor.users.update(this._id, {$set: {"username": username}});
+        }
+    }
+});
+
 export const AdminUserList = React.createClass({
     getRowClass(user) {
         if (isElegibleUser(user)) {
@@ -39,15 +64,21 @@ export const AdminUserList = React.createClass({
             },
             {
                 label: "Name",
-                key: "profile.name"
+                key: "profile.name",
+                tmpl: Template.namer
             },
             {
                 label: "eChalk ID",
-                key: "username"
+                key: "username",
+                tmpl: Template.usernamer
             },
             {
                 label: "Verified",
                 fn: (value, user, key) => user.emails[0].verified.toString()
+            },
+            {
+                label: "Alive",
+                fn: (value, user, key) => user.profile.alive.toString()
             },
             {
                 label: "enabled",
@@ -72,7 +103,7 @@ export const AdminUserList = React.createClass({
 
         return (
             <div>
-                <h3>Green rows will be put into the game, red X to hide a user.</h3>
+                <h3>Green rows will be put into the game, red X to hide a user. Double click to edit name or ID.</h3>
                 <BlazeToReact blazeTemplate="reactiveTable" class="table-scroll" fields={fields}
                               collection={Meteor.users} showNavigation="auto" rowsPerPage={10000}
                               rowClass={this.getRowClass}/>

@@ -4,26 +4,17 @@ Accounts.ui.config({
     passwordSignupFields: 'USERNAME_AND_OPTIONAL_EMAIL'
 });
 
-export class SignUp extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {name: "", id: "", error: ""};
-
-        this.handleNameChange = this.handleNameChange.bind(this);
-        this.handleIdChange = this.handleIdChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
+export const SignUp = React.createClass({
+    getInitialState(){
+        return {name: "", id: "", error: ""};
+    },
     handleNameChange(e) {
         this.setState({name: e.target.value})
-    }
-
+    },
     handleIdChange(e) {
         this.setState({id: e.target.value})
-    }
-
-    handleSubmit(e) {
+    },
+    handleSignup(e) {
         e.preventDefault();
 
         var name = this.state.name.trim();
@@ -43,16 +34,19 @@ export class SignUp extends React.Component {
             console.log(res);
             FlowRouter.go("signup-confirm");
         });
-    }
-
+    },
     render() {
         return (
             <div>
                 <div className="callout secondary">
-                    <form onSubmit={this.handleSubmit}>
+                    <form onSubmit={this.handleSignup}>
                         {this.state.error}
-                        <div className="callout warning">eChalk ID refers to the part of your email before the "@". <br/> ([eChalk ID]@klschools.org)</div>
-                        <div className="callout warning">To make this more clear, if my email is "jjay@klschools.org", I would type "jjay" into the eChalk ID box.</div>
+                        <div className="callout warning">eChalk ID refers to the part of your email before the "@".
+                            <br/> ([eChalk ID]@klschools.org)
+                        </div>
+                        <div className="callout warning">To make this more clear, if my email is "jjay@klschools.org", I
+                            would type "jjay" into the eChalk ID box.
+                        </div>
                         <label>Name
                             <input type="text" placeholder="John Jay" required onChange={this.handleNameChange}/>
                         </label>
@@ -65,7 +59,7 @@ export class SignUp extends React.Component {
             </div>
         )
     }
-}
+});
 
 export class SignUpConfirm extends React.Component {
     render() {
