@@ -39,6 +39,7 @@ const LayoutTemplate = React.createClass({
                             <li className="menu-text">Assassins</li>
                             <li><a href={FlowRouter.path("home")}>Home</a></li>
                             <li><a href={FlowRouter.path("contact")}>Contact</a></li>
+                            <li><a href={FlowRouter.path("leaderboard")}>Leaderboard</a></li>
                         </ul>
                     </div>
                     <div className="top-bar-right">
@@ -53,10 +54,6 @@ const LayoutTemplate = React.createClass({
                 <section role="main">
                     <div className="row">
                         <div className="small-12 columns">
-                            <div className="primary callout">Every user must verify their email address. If you cannot sign
-                                in and access your <a href={FlowRouter.path("dashboard")}>Dashboard</a>, please <a
-                                    href={FlowRouter.path("contact")}>contact</a> me.
-                            </div>
                             {this.props.content}
                         </div>
                     </div>

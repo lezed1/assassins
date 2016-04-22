@@ -9,12 +9,25 @@ import {AdminHome} from "./admin/admin.jsx";
 import {AdminUserList} from "./admin/adminUserLists.jsx";
 import {SignUpConfirm} from "./accounts.jsx";
 import {Contact} from "./contact.jsx";
+import {Leaderboard} from "./leaderboard.jsx";
 
 FlowRouter.route("/", {
     name: "home",
     action() {
         mount(Layout, {
             content: (<Home/>)
+        });
+    }
+});
+
+FlowRouter.route("/leaderboard", {
+    name: "leaderboard",
+    subscriptions() {
+        this.register("leaderboard", Meteor.subscribe("leaderboard"));
+    },
+    action() {
+        mount(Layout, {
+            content: (<Leaderboard/>)
         });
     }
 });

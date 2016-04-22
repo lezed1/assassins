@@ -78,6 +78,7 @@ export const AdminUserList = React.createClass({
             },
             {
                 label: "Alive",
+                ket: "profile.alive",
                 fn: (value, user, key) => user.profile.alive.toString()
             },
             {

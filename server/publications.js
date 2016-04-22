@@ -6,13 +6,23 @@ Meteor.publish('admin', function () {
     }
 });
 
+Meteor.publish('leaderboard', function () {
+    return Meteor.users.find({"profile.enabled": true}, {
+        fields: {
+            "profile.name": 1,
+            "profile.tags": 1,
+            "profile.alive": 1
+        }
+    })
+});
+
 Meteor.publish('targetName', () => {
     if (this.userId) {
         var target_id = Meteor.users.findOne(this.userId).profile.target;
         if (target_id) {
-            return 
+            return
         }
-       return Meteor.users.find(target_id, {fields: {"profile.name": 1}});
+        return Meteor.users.find(target_id, {fields: {"profile.name": 1}});
     }
 });
 
