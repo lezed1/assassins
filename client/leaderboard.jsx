@@ -9,16 +9,18 @@ export const Leaderboard = React.createClass({
         var fields = [
             {
                 label: "Name",
-                key: "profile.name"
+                key: "profile.name",
+                fn: (value, user, key) => user.profile.name.toString()
             },
             {
                 label: "Tags",
-                key: "profile.tags"
+                key: "profile.tags",
+                fn: (value, user, key) => user.profile.tags.toString()
             },
             {
                 label: "Alive",
                 key: "profile.alive",
-                fn: (value, user, key) => user.profile.name.toString()
+                fn: (value, user, key) => user.profile.alive.toString()
             }
         ];
 

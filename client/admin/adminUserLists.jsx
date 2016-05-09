@@ -78,7 +78,7 @@ export const AdminUserList = React.createClass({
             },
             {
                 label: "Alive",
-                ket: "profile.alive",
+                key: "profile.alive",
                 fn: (value, user, key) => user.profile.alive.toString()
             },
             {
@@ -90,7 +90,8 @@ export const AdminUserList = React.createClass({
             },
             {
                 label: "target",
-                key: "profile.target"
+                key: "profile.target",
+                fn: (value, user, key) => Meteor.users.findOne(value).profile.name
             },
             {
                 label: "tags",
