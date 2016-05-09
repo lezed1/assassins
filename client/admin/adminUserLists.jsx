@@ -9,6 +9,19 @@ Template.enabler.events({
     }
 });
 
+Template.killer.events({
+    "click"() {
+        if (!this.profile.alive) {
+            alert("You cannot remove a tagged user.");
+            return;
+        }
+        if (confirm(`Do you want to remove ${this.profile.name} (id: ${this.username}) (verified: ${this.emails[0].verified})`)) {
+            console.log(this._id);
+            Meteor.call("user.remove", this._id);
+        }
+    }
+});
+
 Template.disabler.events({
     "click"() {
         if (this.profile.enabled) {
@@ -57,10 +70,15 @@ export const AdminUserList = React.createClass({
     },
     render(){
         const fields = [
+            // {
+            //     label: "Hide",
+            //     fn: () => "",
+            //     tmpl: Template.disabler
+            // },
             {
-                label: "Hide",
+                label: "Remove",
                 fn: () => "",
-                tmpl: Template.disabler
+                tmpl: Template.killer
             },
             {
                 label: "Name",
@@ -91,7 +109,13 @@ export const AdminUserList = React.createClass({
             {
                 label: "target",
                 key: "profile.target",
-                fn: (value, user, key) => Meteor.users.findOne(value).profile.name
+                fn: (value) => {
+                    var user = Meteor.users.findOne(value);
+                    if (user) {
+                        return user.profile.name
+                    }
+                    return ""
+                }
             },
             {
                 label: "tags",

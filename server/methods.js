@@ -66,6 +66,26 @@ Meteor.methods({
             Meteor.users.remove(_id);
         }
     },
+    "user.remove"(_id) {
+        if (isAdmin(this.userId)) {
+            var user = Meteor.users.findOne(_id);
+            var assassin = Meteor.users.findOne({"profile.target": user._id});
+            if (!assassin) {
+                throw new Meteor.Error("Could not find assassin.");
+            }
+            console.log(user._id);
+            console.log(assassin);
+
+            Meteor.users.update(user._id, {$set: {"profile.alive": false}});
+            Meteor.users.update(assassin._id, {
+                $set: {
+                    "profile.target": user.profile.target,
+                    "profile.target_name": user.profile.target_name
+                },
+                $inc: {"profile.tags": 1}
+            });
+        }
+    },
     "user.tag"({secret_words}) {
         if (this.userId) {
             var user = Meteor.users.findOne(this.userId);
@@ -100,6 +120,7 @@ Meteor.methods({
                 console.log(`${currentUser.profile.name} will target ${lastUser.profile.name}.`);
                 Meteor.users.update(currentUser._id, {
                     $set: {
+                        "profile.alive": true,
                         "profile.target": lastUser._id,
                         "profile.target_name": lastUser.profile.name
                     }
