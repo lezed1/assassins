@@ -2,7 +2,7 @@ import React from 'react';
 import {Table, Sort} from "reactable";
 
 import {createContainer} from 'meteor/react-meteor-data';
-import {elegibleUserCount} from "/lib/game";
+import {getGameState, elegibleUserCount} from "/lib/game";
 
 export const AdminHome = React.createClass({
     mixins: [ReactMeteorData],
@@ -17,7 +17,32 @@ export const AdminHome = React.createClass({
             Meteor.call("startGame");
         }
     },
-    render(){
+    handleShuffle(){
+        if (confirm("Do you actually want to shuffle all users?")) {
+            Meteor.call("shuffleTargets");
+        }
+    },
+    render() {
+        var buttons;
+
+        if (getGameState() == "pregame") {
+            buttons = (
+                <div className="callout">
+                    <h3>Buttons.</h3>
+                    <button type="button" className="primary button" onClick={this.handleStartGame}>Start the game!
+                    </button>
+                </div>
+            )
+        } else {
+            buttons = (
+                <div className="callout">
+                    <h3>Buttons.</h3>
+                    <button type="button" className="primary button" onClick={this.handleShuffle}>Shuffle users.
+                    </button>
+                </div>
+            )
+        }
+
         return (
             <div className="row">
                 <div className="small-12 large-5 columns">
@@ -35,10 +60,7 @@ export const AdminHome = React.createClass({
                     </div>
                 </div>
                 <div className="small-12 large-2 columns">
-                    <div className="callout">
-                        <h3>Buttons.</h3>
-                        <button type="button" className="primary button" onClick={this.handleStartGame}>Start the game!</button>
-                    </div>
+                    {buttons}
                 </div>
             </div>
         )

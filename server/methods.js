@@ -140,5 +140,38 @@ Meteor.methods({
                 })
             })
         }
+    },
+    "shuffleTargets"() {
+        if (isAdmin(this.userId)) {
+            if (getGameState() != "ingame") {
+                throw new Meteor.Error("Game starts", "The game is not in the \"ingame\" state.");
+            }
+
+            console.log("Shuffling?");
+
+            var aliveUsers = _(_(Meteor.users.find().fetch().filter(isElegibleUser).filter(user => user.profile.alive)).shuffle());
+            console.log(aliveUsers.map(user => user.profile.name));
+
+            aliveUsers.reduce((lastUser, currentUser) => {
+                console.log(`${currentUser.profile.name} will target ${lastUser.profile.name}.`);
+                Meteor.users.update(currentUser._id, {
+                    $set: {
+                        "profile.target": lastUser._id,
+                        "profile.target_name": lastUser.profile.name
+                    }
+                });
+                currentUser.profile.target_name = lastUser.profile.name;
+                return currentUser;
+            }, aliveUsers.last());
+
+            aliveUsers.forEach((user) => {
+                Email.send({
+                    from: "no-reply@spoons.lezed1.com",
+                    to: user.emails[0].address,
+                    subject: "Spoons Target Assignment",
+                    text: `You have been assigned to ${user.profile.target_name}. Good luck!`
+                })
+            })
+        }
     }
 });
