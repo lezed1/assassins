@@ -5,7 +5,7 @@ import {check, Match} from 'meteor/check';
 
 import {words} from "./words";
 import {emailSuffix} from "../lib/settings";
-import {getGameState, setGameState, isElegibleUser} from "../lib/game";
+import {getGameState, setGameState, getGlobalState, setGlobalState, isElegibleUser} from "../lib/game";
 
 var UserArchive = new Mongo.Collection("userArchive");
 
@@ -100,8 +100,70 @@ Meteor.methods({
                     },
                     $inc: {"profile.tags": 1}
                 });
+
+                Email.send({
+                    from: "no-reply@spoons.lezed1.com",
+                    to: user.emails[0].address,
+                    subject: "Spoons Target tag",
+                    text: `You have tagged ${target.profile.name}. You have reassigned to ${assassin.profile.target_name}.`
+                });
+
+                Email.send({
+                    from: "no-reply@spoons.lezed1.com",
+                    to: target.emails[0].address,
+                    subject: "Spoons Free For All Tag",
+                    text: `You have been tagged by ${user.profile.name}.`
+                });
+
                 return "tag"
             }
+            throw new Meteor.Error("Invalid secret words.", "Invalid secret words.");
+        }
+    },
+    "user.FFATag"({secret_words}) {
+        if (this.userId) {
+            var target = Meteor.users.findOne({"profile.secret_words": secret_words, "profile.alive": true});
+
+            if (target && isElegibleUser(target)) {
+                var user = Meteor.users.findOne(this.userId);
+                var assassin = Meteor.users.findOne({"profile.target": target._id});
+
+                console.log("FFA!");
+                Meteor.users.update(target._id, {$set: {"profile.alive": false}});
+                Meteor.users.update(assassin._id, {
+                    $set: {
+                        "profile.target": target.profile.target,
+                        "profile.target_name": target.profile.target_name
+                    }
+                });
+                Meteor.users.update(this.userId, {
+                    $inc: {"profile.tags": 1}
+                });
+
+                Email.send({
+                    from: "no-reply@spoons.lezed1.com",
+                    to: user.emails[0].address,
+                    subject: "Spoons Target tag",
+                    text: `You have tagged ${target.profile.name}.`
+                });
+
+                Email.send({
+                    from: "no-reply@spoons.lezed1.com",
+                    to: target.emails[0].address,
+                    subject: "Spoons Free For All Tag",
+                    text: `You have been tagged by ${user.profile.name}.`
+                });
+
+                Email.send({
+                    from: "no-reply@spoons.lezed1.com",
+                    to: assassin.emails[0].address,
+                    subject: "Spoons Free For All Tag",
+                    text: `You have reassigned to ${assassin.profile.target_name}.`
+                });
+
+                return "ffa"
+            }
+
             throw new Meteor.Error("Invalid secret words.", "Invalid secret words.");
         }
     },
@@ -144,7 +206,7 @@ Meteor.methods({
     "shuffleTargets"() {
         if (isAdmin(this.userId)) {
             if (getGameState() != "ingame") {
-                throw new Meteor.Error("Game starts", "The game is not in the \"ingame\" state.");
+                throw new Meteor.Error("Shuffle", "The game is not in the \"ingame\" state.");
             }
 
             console.log("Shuffling?");
@@ -172,6 +234,19 @@ Meteor.methods({
                     text: `You have been assigned to ${user.profile.target_name}. Good luck!`
                 })
             })
+        }
+    },
+    "toggleFreeForAll"() {
+        if (isAdmin(this.userId)) {
+            if (getGameState() != "ingame") {
+                throw new Meteor.Error("Free for all", "The game is not in the \"ingame\" state.");
+            }
+
+            const freeForAll = !getGlobalState("freeForAll");
+
+            console.log(`Setting freeForAll to ${freeForAll}`);
+
+            setGlobalState("freeForAll", freeForAll);
         }
     }
 });

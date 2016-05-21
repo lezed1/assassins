@@ -2,14 +2,15 @@ import React from 'react';
 import {Table, Sort} from "reactable";
 
 import {createContainer} from 'meteor/react-meteor-data';
-import {getGameState, elegibleUserCount} from "/lib/game";
+import {getGameState, elegibleUserCount, getGlobalState} from "/lib/game";
 
 export const AdminHome = React.createClass({
     mixins: [ReactMeteorData],
     getMeteorData() {
         return {
             userTotal: Meteor.users.find().count(),
-            eligibleUserTotal: elegibleUserCount()
+            eligibleUserTotal: elegibleUserCount(),
+            freeForAll: getGlobalState("freeForAll")
         }
     },
     handleStartGame(){
@@ -20,6 +21,11 @@ export const AdminHome = React.createClass({
     handleShuffle(){
         if (confirm("Do you actually want to shuffle all users?")) {
             Meteor.call("shuffleTargets");
+        }
+    },
+    handleFFAToggle(){
+        if (confirm("Do you actually want to toggle Free For All mode?")) {
+            Meteor.call("toggleFreeForAll");
         }
     },
     render() {
@@ -35,10 +41,17 @@ export const AdminHome = React.createClass({
             )
         } else {
             buttons = (
-                <div className="callout">
-                    <h3>Buttons.</h3>
-                    <button type="button" className="primary button" onClick={this.handleShuffle}>Shuffle users.
-                    </button>
+                <div>
+                    <div className="callout">
+                        <h3>Buttons.</h3>
+                        <button type="button" className="primary button" onClick={this.handleShuffle}>
+                            Shuffle users.
+                        </button>
+                        <br/>
+                        <button type="button" className="primary button" onClick={this.handleFFAToggle}>
+                            {this.data.freeForAll ? "Disable" : "Enable"} Free For All Mode.
+                        </button>
+                    </div>
                 </div>
             )
         }

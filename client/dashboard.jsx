@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {emailSuffix} from "../lib/settings"
-import {getGameState} from "../lib/game";
+import {getGameState, getGlobalState} from "../lib/game";
 
 export const Dashboard = React.createClass({
         mixins: [ReactMeteorData],
@@ -10,7 +10,8 @@ export const Dashboard = React.createClass({
                 return {
                     user: Meteor.user(),
                     pregame: getGameState() == "pregame",
-                    targetName: Meteor.user().profile.target_name
+                    targetName: Meteor.user().profile.target_name,
+                    freeForAll: getGlobalState("freeForAll")
                 }
             } else {
                 return {
@@ -20,15 +21,19 @@ export const Dashboard = React.createClass({
                         emails: [{verified: false}]
                     },
                     pregame: getGameState() == "pregame",
-                    targetName: ""
+                    targetName: "",
+                    freeForAll: getGlobalState("freeForAll")
                 }
             }
         },
         getInitialState(){
-            return {error: "", targetSecretWords: ""}
+            return {error: "", FFAError: "", targetSecretWords: "", FFAWords: ""}
         },
         handleSecretWordsChange(e) {
             this.setState({targetSecretWords: e.target.value})
+        },
+        handleFFAWordsChange(e) {
+            this.setState({FFAWords: e.target.value})
         },
         handleTag(e) {
             e.preventDefault();
@@ -46,6 +51,26 @@ export const Dashboard = React.createClass({
                     return;
                 }
                 this.setState({error: ""});
+                alert("Tag Successful.");
+            })
+        },
+        handleFFA(e) {
+            e.preventDefault();
+
+            var secret_words = this.state.FFAWords.trim().toLowerCase();
+
+            if (!secret_words || !secret_words.includes(" ")) {
+                this.setState({error: <div className="callout small alert">Invalid input.</div>});
+                return;
+            }
+
+            Meteor.call("user.FFATag", {secret_words}, (error, res) => {
+                if (error) {
+                    this.setState({FFAError: <div className="callout small alert">{error.reason}</div>});
+                    return;
+                }
+                this.setState({FFAError: ""});
+                alert("FFA Successful.");
             })
         },
         render() {
@@ -70,9 +95,32 @@ export const Dashboard = React.createClass({
                     </div>
                 )
             }
+
+            var FFA = "";
+            if (this.data.freeForAll) {
+                FFA = (
+                    <div className="row">
+                        <div className="small-12">
+                            <div className="callout secondary">
+                                <h5>Free For All Mode enabled!</h5>
+                                <form onSubmit={this.handleFFA}>
+                                    {this.state.error}
+                                    <label>Target's secret words
+                                        <input type="text" placeholder="Tomato Sneaker" required
+                                               onChange={this.handleFFAWordsChange}/>
+                                    </label>
+                                    <input type="submit" className="button" value="Tag your target!"/>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                )
+            }
+
             return (
                 <div>
                     <h3>Dashboard:</h3>
+                    {FFA}
                     <div className="row">
                         <div className="small-12 medium-6 columns">
                             <div className="callout secondary">
