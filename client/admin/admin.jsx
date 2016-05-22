@@ -2,7 +2,7 @@ import React from 'react';
 import {Table, Sort} from "reactable";
 
 import {createContainer} from 'meteor/react-meteor-data';
-import {getGameState, elegibleUserCount, getGlobalState} from "/lib/game";
+import {getGameState, elegibleUserCount, aliveUserCount, getGlobalState} from "/lib/game";
 
 export const AdminHome = React.createClass({
     mixins: [ReactMeteorData],
@@ -10,20 +10,21 @@ export const AdminHome = React.createClass({
         return {
             userTotal: Meteor.users.find().count(),
             eligibleUserTotal: elegibleUserCount(),
+            aliveUserTotal: aliveUserCount(),
             freeForAll: getGlobalState("freeForAll")
         }
     },
-    handleStartGame(){
+    handleStartGame() {
         if (confirm("Do you actually want to start the game?")) {
             Meteor.call("startGame");
         }
     },
-    handleShuffle(){
+    handleShuffle() {
         if (confirm("Do you actually want to shuffle all users?")) {
             Meteor.call("shuffleTargets");
         }
     },
-    handleFFAToggle(){
+    handleFFAToggle() {
         if (confirm("Do you actually want to toggle Free For All mode?")) {
             Meteor.call("toggleFreeForAll");
         }
@@ -64,6 +65,7 @@ export const AdminHome = React.createClass({
                         <ul>
                             <li>Total users registered: {this.data.userTotal}</li>
                             <li>Eligible users: {this.data.eligibleUserTotal}</li>
+                            <li>Alive users: {this.data.aliveUserTotal}</li>
                         </ul>
                     </div>
                 </div>
