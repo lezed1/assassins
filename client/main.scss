@@ -6,10 +6,13 @@
 //@include foundation-everything;
 
 // or you can unclude only some of the parts:
-@include foundation-global-styles;
 //@include foundation-grid;
+@include foundation-global-styles;
+// @include foundation-grid;
+
 @include foundation-flex-classes;
 @include foundation-flex-grid;
+
 @include foundation-typography;
 @include foundation-button;
 @include foundation-forms;
@@ -25,7 +28,7 @@
 @include foundation-drilldown-menu;
 @include foundation-dropdown;
 @include foundation-dropdown-menu;
-@include foundation-flex-video;
+@include foundation-responsive-embed;
 @include foundation-label;
 @include foundation-media-object;
 @include foundation-menu;
@@ -68,4 +71,18 @@ tr.success {
   &:nth-child(even) {
     background-color: lighten($success-color, 10%);
   }
+}
+
+.spin {
+    animation: spin 1.5s infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }

@@ -24,8 +24,8 @@ export const Home = React.createClass({
         return (
             <div>
                 <div className="row medium-unstack align-center">
-                    <div className="columns">
-                        <img src="/spoon_purple.png"/>
+                    <div className="hide-for-small-only medium-4 columns">
+                        <img className="spin" src="/prop.png"/>
                     </div>
                     {signup}
                 </div>
