@@ -110,7 +110,7 @@ Meteor.methods({
                 Email.send({
                     from: "no-reply@assassins.lezed1.com",
                     to: target.emails[0].address,
-                    subject: "CUAUV Assassins Free For All Tag",
+                    subject: "CUAUV Assassins elimination",
                     text: `You have been tagged by ${user.profile.name}.`
                 });
 
@@ -142,21 +142,21 @@ Meteor.methods({
                 Email.send({
                     from: "no-reply@assassins.lezed1.com",
                     to: user.emails[0].address,
-                    subject: "CUAUV Assassins Target tag",
+                    subject: "CUAUV Assassins Free For All Target tag",
                     text: `You have tagged ${target.profile.name}.`
                 });
 
                 Email.send({
                     from: "no-reply@assassins.lezed1.com",
                     to: target.emails[0].address,
-                    subject: "CUAUV Assassins Free For All Tag",
+                    subject: "CUAUV Assassins Free For All elimination",
                     text: `You have been tagged by ${user.profile.name}.`
                 });
 
                 Email.send({
                     from: "no-reply@assassins.lezed1.com",
                     to: assassin.emails[0].address,
-                    subject: "CUAUV Assassins Free For All Tag",
+                    subject: "CUAUV Assassins Free For All Target reassignment",
                     text: `You have reassigned to ${user.profile.target_name}.`
                 });
 
