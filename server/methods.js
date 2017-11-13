@@ -25,7 +25,7 @@ Meteor.methods({
         check(name, NonEmptyString);
         check(id, NonEmptyString);
 
-        console.log(name, id);
+        console.log("Signup!", name, id);
 
         var secret1 = words[Math.floor(Math.random() * words.length)];
         var secret2 = words[Math.floor(Math.random() * words.length)];
@@ -90,7 +90,7 @@ Meteor.methods({
             var user = Meteor.users.findOne(this.userId);
             var target = Meteor.users.findOne(user.profile.target);
             if (target.profile.secret_words == secret_words) {
-                console.log("Tag!");
+                console.log(`Tag! ${user.profile.name} has tagged ${target.profile.name}.`);
                 Meteor.users.update(target._id, {$set: {"profile.alive": false}});
                 Meteor.users.update(user._id, {
                     $set: {
@@ -127,7 +127,7 @@ Meteor.methods({
                 var user = Meteor.users.findOne(this.userId);
                 var assassin = Meteor.users.findOne({"profile.target": target._id});
 
-                console.log("FFA!");
+                console.log(`FFA! ${user.profile.name} has tagged ${target.profile.name}.`);
                 Meteor.users.update(target._id, {$set: {"profile.alive": false}});
                 Meteor.users.update(assassin._id, {
                     $set: {
