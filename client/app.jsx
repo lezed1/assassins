@@ -38,7 +38,6 @@ const LayoutTemplate = React.createClass({
                         <ul className="menu">
                             <li className="menu-text">Assassins</li>
                             <li><a href={FlowRouter.path("home")}>Home</a></li>
-                            <li><a href={FlowRouter.path("contact")}>Contact</a></li>
                             <li><a href={FlowRouter.path("leaderboard")}>Leaderboard</a></li>
                         </ul>
                     </div>
