@@ -47,8 +47,7 @@ Meteor.methods({
         };
         var a = Accounts.createUser(user);
 
-        Accounts.sendVerificationEmail(a);
-
+        // Accounts.sendVerificationEmail(a);
 
         return secret_words;
 
@@ -195,10 +194,14 @@ Meteor.methods({
 
             enabledUsers.forEach((user) => {
                 Email.send({
-                    from: "no-reply@spoons.lezed1.com",
+                    from: "no-reply@assassins.lezed1.com",
                     to: user.emails[0].address,
-                    subject: "Spoons Target Assignment",
-                    text: `You have been assigned to ${user.profile.target_name}. Good luck!`
+                    subject: "CUAUV Assassins Target Assignment",
+                    text: `You have been assigned to ${user.profile.target_name}. Good luck!
+
+Your Secret Words are ${user.profile.secret_words}.
+
+You can log in to you dashboard at https://assassins.lezed1.com/.`
                 })
             })
         }
