@@ -86,7 +86,7 @@ export const AdminUserList = React.createClass({
                 tmpl: Template.namer
             },
             {
-                label: "eChalk ID",
+                label: "NetID",
                 key: "username",
                 tmpl: Template.usernamer
             },

@@ -101,16 +101,16 @@ Meteor.methods({
                 });
 
                 Email.send({
-                    from: "no-reply@spoons.lezed1.com",
+                    from: "no-reply@assassins.lezed1.com",
                     to: user.emails[0].address,
-                    subject: "Spoons Target tag",
+                    subject: "CUAUV Assassins Target tag",
                     text: `You have tagged ${target.profile.name}. You have reassigned to ${assassin.profile.target_name}.`
                 });
 
                 Email.send({
-                    from: "no-reply@spoons.lezed1.com",
+                    from: "no-reply@assassins.lezed1.com",
                     to: target.emails[0].address,
-                    subject: "Spoons Free For All Tag",
+                    subject: "CUAUV Assassins Free For All Tag",
                     text: `You have been tagged by ${user.profile.name}.`
                 });
 
@@ -140,23 +140,23 @@ Meteor.methods({
                 });
 
                 Email.send({
-                    from: "no-reply@spoons.lezed1.com",
+                    from: "no-reply@assassins.lezed1.com",
                     to: user.emails[0].address,
-                    subject: "Spoons Target tag",
+                    subject: "CUAUV Assassins Target tag",
                     text: `You have tagged ${target.profile.name}.`
                 });
 
                 Email.send({
-                    from: "no-reply@spoons.lezed1.com",
+                    from: "no-reply@assassins.lezed1.com",
                     to: target.emails[0].address,
-                    subject: "Spoons Free For All Tag",
+                    subject: "CUAUV Assassins Free For All Tag",
                     text: `You have been tagged by ${user.profile.name}.`
                 });
 
                 Email.send({
-                    from: "no-reply@spoons.lezed1.com",
+                    from: "no-reply@assassins.lezed1.com",
                     to: assassin.emails[0].address,
-                    subject: "Spoons Free For All Tag",
+                    subject: "CUAUV Assassins Free For All Tag",
                     text: `You have reassigned to ${assassin.profile.target_name}.`
                 });
 
@@ -231,9 +231,9 @@ You can log in to you dashboard at https://assassins.lezed1.com/.`
 
             aliveUsers.forEach((user) => {
                 Email.send({
-                    from: "no-reply@spoons.lezed1.com",
+                    from: "no-reply@assassins.lezed1.com",
                     to: user.emails[0].address,
-                    subject: "Spoons Target Assignment",
+                    subject: "CUAUV Assassins Target Assignment",
                     text: `You have been assigned to ${user.profile.target_name}. Good luck!`
                 })
             })
