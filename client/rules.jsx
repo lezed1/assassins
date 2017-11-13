@@ -49,6 +49,7 @@ export const Rules = React.createClass({
                                         <li>During any event in Student Center (lectures, discussions, labs, etc)
                                             or official class related work (prelims, review sessions, etc)</li>
                                     </ul>
+                                </li>
                                 <li>
                                     Assassinations are allowed in these places/times:
                                     <ul>
