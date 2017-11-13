@@ -199,9 +199,9 @@ Meteor.methods({
                     subject: "CUAUV Assassins Target Assignment",
                     text: `You have been assigned to ${user.profile.target_name}. Good luck!
 
-Your Secret Words are ${user.profile.secret_words}.
+Your Secret Words are "${user.profile.secret_words}". These are used to log in to your Dashboard and confirm tags. When you tag someone, you must ask and enter their secret words on your dashboard.
 
-You can log in to you dashboard at https://assassins.lezed1.com/.`
+You can log in to your dashboard at https://assassins.lezed1.com/.`
                 })
             })
         }
