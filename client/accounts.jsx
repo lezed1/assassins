@@ -61,13 +61,13 @@ export class SignUpConfirm extends React.Component {
             <div >
                 <h1>Your account has been created!</h1>
                 <p>
-                    A verification email has been sent to your @klschools.org email account. Please click the link in
+                    A verification email has been sent to your @cornell.edu email account. Please click the link in
                     the email to verify your account.
                     <div className="callout success">
                         You must verify your account before the start of the game to participate. If you do not verify
                         your account before the start of the game, you will not be able to play.
                     </div>
-                    <a className="button" href="http://webmail.klschools.org/"> Go to your email now</a>
+                    <a className="button" href="https://cmail.cornell.edu"> Go to your email now</a>
                 </p>
             </div>
         )

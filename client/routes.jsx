@@ -8,7 +8,6 @@ import {Dashboard} from "./dashboard.jsx";
 import {AdminHome} from "./admin/admin.jsx";
 import {AdminUserList} from "./admin/adminUserLists.jsx";
 import {SignUpConfirm} from "./accounts.jsx";
-import {Contact} from "./contact.jsx";
 import {Leaderboard} from "./leaderboard.jsx";
 
 FlowRouter.route("/", {
@@ -37,15 +36,6 @@ FlowRouter.route("/confirm", {
     action() {
         mount(Layout, {
             content: (<SignUpConfirm/>)
-        });
-    }
-});
-
-FlowRouter.route("/contact", {
-    name: "contact",
-    action() {
-        mount(Layout, {
-            content: (<Contact/>)
         });
     }
 });

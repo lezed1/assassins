@@ -18,7 +18,7 @@ export const Leaderboard = React.createClass({
                 fn: (value, user, key) => user.profile.tags.toString()
             },
             {
-                label: "Alive",
+                label: "Alive?",
                 key: "profile.alive",
                 fn: (value, user, key) => user.profile.alive.toString()
             }

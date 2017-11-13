@@ -128,7 +128,6 @@ export const Dashboard = React.createClass({
                                 <p>Name: {this.data.user.profile.name}</p>
                                 <p>Secret Words: {this.data.user.profile.secret_words}</p>
                                 <p>Email: {this.data.user.username + "" + emailSuffix}</p>
-                                <p>Email verified: {this.data.user.emails[0].verified.toString()}</p>
                             </div>
                         </div>
                         <div className="small-12 medium-6 columns">
