@@ -104,7 +104,7 @@ Meteor.methods({
                     from: "no-reply@assassins.lezed1.com",
                     to: user.emails[0].address,
                     subject: "CUAUV Assassins Target tag",
-                    text: `You have tagged ${target.profile.name}. You have reassigned to ${user.profile.target_name}.`
+                    text: `You have tagged ${target.profile.name}. You have reassigned to ${target.profile.target_name}.`
                 });
 
                 Email.send({
@@ -114,7 +114,7 @@ Meteor.methods({
                     text: `You have been tagged by ${user.profile.name}.`
                 });
 
-                return "tag"
+                return "tag";
             }
             throw new Meteor.Error("Invalid secret words.", "Invalid secret words.");
         }
@@ -157,10 +157,10 @@ Meteor.methods({
                     from: "no-reply@assassins.lezed1.com",
                     to: assassin.emails[0].address,
                     subject: "CUAUV Assassins Free For All Target reassignment",
-                    text: `You have reassigned to ${user.profile.target_name}.`
+                    text: `Your target was tagged in a Free For All. You have reassigned to ${target.profile.target_name}.`
                 });
 
-                return "ffa"
+                return "ffa";
             }
 
             throw new Meteor.Error("Invalid secret words.", "Invalid secret words.");
