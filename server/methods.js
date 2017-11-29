@@ -233,8 +233,8 @@ You can log in to your dashboard at https://assassins.lezed1.com/.`
                 Email.send({
                     from: "no-reply@assassins.lezed1.com",
                     to: user.emails[0].address,
-                    subject: "CUAUV Assassins Target Assignment",
-                    text: `You have been assigned to ${user.profile.target_name}. Good luck!`
+                    subject: "CUAUV Assassins Target Shuffle",
+                    text: `Targets have been shuffled! You have been reassigned to ${user.profile.target_name}. Good luck!`
                 })
             })
         }
