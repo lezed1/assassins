@@ -97,7 +97,7 @@ export const Dashboard = React.createClass({
             }
 
             var FFA = "";
-            if (this.data.freeForAll) {
+            if (this.data.freeForAll && this.data.user.profile.alive) {
                 FFA = (
                     <div className="row">
                         <div className="small-12">
