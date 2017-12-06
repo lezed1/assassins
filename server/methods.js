@@ -88,6 +88,11 @@ Meteor.methods({
     "user.tag"({secret_words}) {
         if (this.userId) {
             var user = Meteor.users.findOne(this.userId);
+
+            if (!user.profile.alive) {
+                throw new Meteor.Error("You are not still in the game.", "You are not still in the game.");
+            }
+
             var target = Meteor.users.findOne(user.profile.target);
             if (target.profile.secret_words == secret_words) {
                 console.log(`Tag! ${user.profile.name} has tagged ${target.profile.name}.`);
@@ -121,10 +126,15 @@ Meteor.methods({
     },
     "user.FFATag"({secret_words}) {
         if (this.userId) {
+            var user = Meteor.users.findOne(this.userId);
+
+            if (!user.profile.alive) {
+                throw new Meteor.Error("You are not still in the game.", "You are not still in the game.");
+            }
+
             var target = Meteor.users.findOne({"profile.secret_words": secret_words, "profile.alive": true});
 
             if (target && isElegibleUser(target)) {
-                var user = Meteor.users.findOne(this.userId);
                 var assassin = Meteor.users.findOne({"profile.target": target._id});
 
                 console.log(`FFA! ${user.profile.name} has tagged ${target.profile.name}.`);
